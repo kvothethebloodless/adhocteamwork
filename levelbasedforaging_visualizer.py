@@ -168,12 +168,12 @@ class arena_game():
 
 
 dummy_params = np.random.random((2,3))
-dummy_params[:,1]*=100
+dummy_params[:,1]*=500
 dummy_params[:,2]*=2
 dummy_food = np.zeros((10,10))
 dummy_food [1,1] = .09
 dummy_food [1,2] = .1
-dummy_pos = np.array([[3,3],[4,4]])
+dummy_pos = np.array([[5,3],[4,4]])
 orientations = np.array([4,2])
 capacities = np.array([4,4])
 a = arena_game(dummy_food,dummy_params)
