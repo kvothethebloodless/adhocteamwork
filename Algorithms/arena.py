@@ -96,8 +96,25 @@ class arena()
         is_agent_adjacent = agents_relative_distances<=np.sqrt(2)
         no_surrounding_agents = np.sum(is_agent_adjacent,axis=1)
         is_consumable = no_surrounding_agents>2
-        potentially_consumable_items = [item if consumable else None for consumable in is_consumable ]
-        potentially_consuming_agents = [[agent if is_adjacent else None for (agent,is_adjacent) in zip(self.agents,is_agent_adjacent[i])]for i in range(self.no_items)]
+        potentially_consumable_items = [[item,i] if consumable else None for consumable,i in zip(is_consumable,range(self.no_agents))]#List of items and their indexes that
+        #are consumable
+        potentially_consuming_agents = [[agent if is_adjacent else None for (agent,is_adjacent) in zip(self.agents,is_agent_adjacent[i])]for i in potentially_consumable_items[:,1]]
+        #list of agents that could consume potential items ordered according to the previous list of items that could be consumed.
+
+        #Criteria for load operation being on
+        consumable_criteria_1 = np.array([True if np.all(np.array([agent.load for agent in probable_consumers])) else False for probable_consumers in potentially_consuming_agents])
+
+        #Criteria for sum of capacities being greater than weight of the item
+        consumable_criteria_2 = np.array([True if sum([agent.capacity for agent in potentially_consuming_agents[i]])>probably_consumed_item.weight else False for [probably_consumed_item,i] in potentially_consumable_items])
+
+
+        consumable_allpass = np.all(consumable_criteria_1,consumable_criteria_2)
+        items_to_consume = [item if consumable else None for ]
+
+
+
+
+
 
 
 
