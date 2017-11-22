@@ -1,0 +1,49 @@
+type: "MARKDOWN_NOTE"
+folder: "78d8febd661b0093af37"
+title: "What we need:"
+content: '''
+  ## MCTS Design
+  
+  
+  # What we need:
+  
+  * A 'WORLD' with these attributes.
+    * Variables:
+      * curr_state - numpy array or list describing the current state of the world.
+      * all_actions - list of all actions
+    * Methods:
+      * ``` get_actionsLegal(state_curr) ```
+        * _state_curr_ is a numpy-array describing state.
+        * _actions_legal_ : should return a set of indices of legal(possible) actions from the all_actions list.
+      * ``` get_stateNext(state_curr,action_curr) ```
+        * Should return next state given _state_curr_  and _action_curr_ (index of the action taken)
+      * ``` get_reward(state_curr) ```
+        * returns _reward_ as the reward obtained in being the _state_curr_
+  
+  # How we use this;
+   * Initialize an instance of 'WORLD' with the state_curr of the simulation. 
+   * Create a new object of the _mcts_node_ class with the _state_curr_ as an attribute.
+   * Set _node.parent_ as None
+   * Initialize a dictionary for storing state nodes and add the above node.
+   * Run the following loop for a specified number of types.
+   * While (end of the world):
+     * ```actions = world.get_actionsLegal```
+     * if we have all the children, pick one according to UCT, otherwise create them and add them to dictionary, children_list and then pick.
+     * pick an action based on the highest UCT
+     * get ```state_next = world.get_stateNext```
+     * retrieve the _state_next_'s reward and append that to the reward_list. 
+     * increment the counter(for the curr_trajectory) by 1. 
+     * set state_next's parent as state_curr
+     * set state_curr as state_next.
+   * backprop.
+   * 
+     
+     
+     
+     
+'''
+tags: []
+isStarred: false
+isTrashed: false
+createdAt: "2017-10-23T05:49:50.283Z"
+updatedAt: "2017-10-23T06:43:14.186Z"
